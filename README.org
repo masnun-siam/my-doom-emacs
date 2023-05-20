@@ -1,5 +1,5 @@
 #+TITLE:   Personal DOOM Emacs Configuration
-#+AUTHOR:  Sravan Balaji
+#+AUTHOR:  Masnun Siam
 #+AUTO_TANGLE: t
 #+STARTUP: showeverything
 
