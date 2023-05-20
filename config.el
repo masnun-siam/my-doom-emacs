@@ -2,9 +2,9 @@
 
 (setq user-full-name "Masnun Siam")
 
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 16)
+(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 16)
       doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 16)
-      doom-big-font (font-spec :family "VictorMono Nerd Font" :size 24)
+      doom-big-font (font-spec :family "BlexMono Nerd Font" :size 24)
       doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 16))
 
 (after! doom-themes
