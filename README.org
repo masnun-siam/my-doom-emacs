@@ -97,7 +97,7 @@ Alternatively, press =gd= (or =C-c c d=) on a module to browse its directory (fo
        (popup +defaults)                       ; tame sudden yet inevitable temporary windows
        ;;tabs                                  ; a tab bar for Emacs
        treemacs                                ; a project drawer, like neotree but cooler
-       ;;unicode                               ; extended unicode support for various languages
+       unicode                               ; extended unicode support for various languages
        vc-gutter                               ; vcs diff in the fringe
        vi-tilde-fringe                         ; fringe tildes to mark beyond EOB
        ;;window-select                         ; visually switch windows
@@ -202,7 +202,7 @@ Alternatively, press =gd= (or =C-c c d=) on a module to browse its directory (fo
        ;;crystal                               ; ruby at the speed of c
        ;;csharp                                ; unity, .NET, and mono shenanigans
        data                                    ; config/data formats
-       ;;(dart +flutter)                       ; paint ui and not much else
+       (dart +flutter +lsp)                       ; paint ui and not much else
        ;;dhall
        ;;elixir                                ; erlang done right
        ;;elm                                   ; care for a cup of TEA?
@@ -217,7 +217,7 @@ Alternatively, press =gd= (or =C-c c d=) on a module to browse its directory (fo
        ;;gdscript                              ; the language you waited for
        ;;(go +lsp)                             ; the hipster dialect
        ;;(graphql +lsp)                        ; Give queries a REST
-       (haskell +lsp)                          ; a language that's lazier than I am
+       ;;(haskell +lsp)                          ; a language that's lazier than I am
        ;;hy                                    ; readability of scheme w/ speed of python
        ;;idris                                 ; a language you can depend on
        (json +lsp)                             ; At least it ain't XML
@@ -270,11 +270,11 @@ Alternatively, press =gd= (or =C-c c d=) on a module to browse its directory (fo
 
 #+BEGIN_SRC emacs-lisp :tangle init.el
        :app
-       ;;calendar
+       calendar
        ;;emms
-       ;;everywhere        ; *leave* Emacs!? You must be joking
+       everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
+       (rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 #+END_SRC
 
@@ -312,7 +312,7 @@ You can also try =gd= (or =C-c c d=) to jump to their definition and see how the
 Some functionality uses this to identify you, e.g. GPG configuration, email clients, file templates and snippets.
 
 #+BEGIN_SRC emacs-lisp :tangle config.el
-(setq user-full-name "Sravan Balaji")
+(setq user-full-name "Masnun Siam")
 #+END_SRC
 
 *** User Interface
@@ -335,10 +335,10 @@ They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font 
 Set regular, variable pitch, and big fonts.
 
 #+BEGIN_SRC emacs-lisp :tangle config.el
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 14)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14)
+(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 16)
+      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 16)
       doom-big-font (font-spec :family "VictorMono Nerd Font" :size 24)
-      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 14))
+      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 16))
 #+END_SRC
 
 Enable *bold* and /italic/ text.
@@ -362,13 +362,13 @@ Make comments and keywords /italicized/.
 There are two ways to load a theme. Both assume the theme is installed and available. You can either set =doom-theme= or manually load a theme with the =load-theme= function.
 
 #+BEGIN_SRC emacs-lisp :tangle config.el
-(setq doom-theme 'dracula-pro-pro)
+(setq doom-theme 'doom-one)
 #+END_SRC
 
 **** Opacity
 
 #+BEGIN_SRC emacs-lisp :tangle config.el
-(doom/set-frame-opacity 95)
+(doom/set-frame-opacity 100)
 #+END_SRC
 
 **** Line Numbers
@@ -388,9 +388,9 @@ This determines the style of line numbers in effect. If set to =nil=, line numbe
 **** Highlight Indent Guides
 
 #+BEGIN_SRC emacs-lisp :tangle config.el
-(setq highlight-indent-guides-method 'fill)
-(setq highlight-indent-guides-responsive 'stack)
-(setq highlight-indent-guides-delay 0)
+;; (setq highlight-indent-guides-method 'nil')
+;; (setq highlight-indent-guides-responsive 'stack)
+;; (setq highlight-indent-guides-delay 0)
 #+END_SRC
 
 **** Modeline
@@ -756,7 +756,7 @@ If you use =org= and don't want your org files in the default location below, ch
 *** Projectile
 
 #+BEGIN_SRC emacs-lisp :tangle config.el
-(setq projectile-project-search-path '("~/Projects/Personal/" "~/Projects/System/" "~/.config/"))
+(setq projectile-project-search-path '("~/Documents/projects/flutter/personal/" "~/Documents/projects/flutter/roxarth/" "~/Documents/projects/flutter/BF/" "~/.doom.d" "~/.config/"))
 #+END_SRC
 
 *** Prettier Formatter
@@ -838,6 +838,19 @@ Revert buffers when the underlying file has changed
 (after! dap-mode
   (setq dap-python-debugger 'debugpy))
 #+END_SRC
+
+
+**** Github Copilot
+#+begin_src emacs-lisp :tangle config.el
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+#+end_src
 
 ** packages.el
 
@@ -923,4 +936,6 @@ Doom's packages are pinned to a specific commit and updated from release to rele
 (package! systemd)
 (package! pkgbuild-mode)
 (package! lua-mode)
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 #+END_SRC

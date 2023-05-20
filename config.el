@@ -1,11 +1,11 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(setq user-full-name "Sravan Balaji")
+(setq user-full-name "Masnun Siam")
 
-(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 14)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14)
+(setq doom-font (font-spec :family "VictorMono Nerd Font" :size 16)
+      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 16)
       doom-big-font (font-spec :family "VictorMono Nerd Font" :size 24)
-      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 14))
+      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 16))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -15,17 +15,17 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq doom-theme 'dracula-pro-pro)
+(setq doom-theme 'doom-one)
 
-(doom/set-frame-opacity 95)
+(doom/set-frame-opacity 100)
 
 (setq display-line-numbers-type t)
 
 (setq-default tab-width 4)
 
-(setq highlight-indent-guides-method 'fill)
-(setq highlight-indent-guides-responsive 'stack)
-(setq highlight-indent-guides-delay 0)
+;; (setq highlight-indent-guides-method 'nil')
+;; (setq highlight-indent-guides-responsive 'stack)
+;; (setq highlight-indent-guides-delay 0)
 
 ;; (setq doom-modeline-support-imenu t)
 
@@ -168,7 +168,7 @@
  '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.4))))
  '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.2)))))
 
-(setq projectile-project-search-path '("~/Projects/Personal/" "~/Projects/System/" "~/.config/"))
+(setq projectile-project-search-path '("~/Documents/projects/flutter/personal/" "~/Documents/projects/flutter/roxarth/" "~/Documents/projects/flutter/BF/" "~/.doom.d" "~/.config/"))
 
 (add-hook! 'web-mode-hook 'prettier-js-mode)
 
@@ -217,3 +217,12 @@
 
 (after! dap-mode
   (setq dap-python-debugger 'debugpy))
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
