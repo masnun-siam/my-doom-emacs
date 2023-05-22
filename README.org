@@ -376,7 +376,7 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 
 **** Borderless
 I normally hide the titlebar since it has no use
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle config.el
 (add-to-list 'default-frame-alist '(undecorated . t))
 #+end_src
 

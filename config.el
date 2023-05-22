@@ -17,6 +17,8 @@
 
 (setq doom-theme 'dracula-pro-pro)
 
+(add-to-list 'default-frame-alist '(undecorated . t))
+
 (doom/set-frame-opacity 100)
 
 (setq display-line-numbers-type t)
