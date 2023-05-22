@@ -15,7 +15,7 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq doom-theme 'doom-one)
+(setq doom-theme 'dracula-pro-pro)
 
 (doom/set-frame-opacity 100)
 
@@ -119,6 +119,8 @@
 
 (setq doom-modeline-before-update-env-hook nil)
 (setq doom-modeline-after-update-env-hook nil)
+
+(setq dired-lising-switches "-la")
 
 (setq org-directory "~/org/")
 
