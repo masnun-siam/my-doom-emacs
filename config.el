@@ -2,10 +2,10 @@
 
 (setq user-full-name "Masnun Siam")
 
-(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 16)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 16)
+(setq doom-font (font-spec :family "CaskaydiaCove Nerd Font" :size 19)
+      doom-variable-pitch-font (font-spec :family "CaskaydiaCove Nerd Font" :size 19)
       doom-big-font (font-spec :family "BlexMono Nerd Font" :size 24)
-      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 16))
+      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 18))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -15,13 +15,15 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq doom-theme 'dracula-pro-pro)
+(setq doom-theme 'doom-gruvbox)
 
 (add-to-list 'default-frame-alist '(undecorated . t))
 
-(doom/set-frame-opacity 100)
+(doom/set-frame-opacity 90)
 
 (setq display-line-numbers-type t)
+
+(setq global-hl-line-mode nil)
 
 (setq-default tab-width 4)
 
@@ -173,6 +175,9 @@
  '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.2)))))
 
 (setq projectile-project-search-path '("~/Documents/projects/flutter/personal/" "~/Documents/projects/flutter/roxarth/" "~/Documents/projects/flutter/BF/" "~/.doom.d" "~/.config/"))
+(with-eval-after-load 'projectile
+  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
 
 (add-hook! 'web-mode-hook 'prettier-js-mode)
 
