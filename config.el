@@ -15,7 +15,7 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-one)
 
 (add-to-list 'default-frame-alist '(undecorated . t))
 
